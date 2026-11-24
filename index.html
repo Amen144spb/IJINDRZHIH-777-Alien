@@ -3,247 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IJINDRZHIH CASINO</title>
+<title>IJINDRZHIH CASINO — Alien Sector</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
   body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #04010a;
+    background-color: #05020d;
     background-image:
-      radial-gradient(circle at 18% 20%, rgba(184, 41, 234, 0.42) 0%, transparent 50%),
-      radial-gradient(circle at 82% 80%, rgba(57, 255, 20, 0.32) 0%, transparent 50%),
-      radial-gradient(#39ff14 1.2px, transparent 1.2px),
-      radial-gradient(#df66ff 1.8px, transparent 1.8px);
-    background-size: 100% 100%, 100% 100%, 55px 55px, 95px 95px;
-    background-position: 0 0, 0 0, 0 0, 28px 38px;
+      radial-gradient(circle at 20% 25%, rgba(184, 41, 234, 0.35) 0%, transparent 48%),
+      radial-gradient(circle at 80% 75%, rgba(57, 255, 20, 0.25) 0%, transparent 48%),
+      radial-gradient(#39ff14 1px, transparent 1px),
+      radial-gradient(#d45eff 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 84px 84px;
+    background-position: 0 0, 0 0, 0 0, 24px 24px;
     color: #e8ffe6;
-    padding: 8px;
+    padding: 12px;
   }
-  .terminal {
+
+  /* Компактное окно в стиле вашего примера */
+  .oracle-card {
     width: 100%;
-    max-width: 680px;
-    background: rgba(15, 6, 34, 0.96);
-    border: 3px solid #39ff14;
-    border-radius: 22px;
-    padding: 14px 22px;
-    box-shadow: 0 0 30px rgba(57, 255, 20, 0.4), 0 0 65px rgba(184, 41, 234, 0.45), inset 0 0 25px rgba(184, 41, 234, 0.35);
+    max-width: 440px;
+    background: rgba(13, 6, 30, 0.96);
+    border: 2px solid #39ff14;
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow:
+      0 0 28px rgba(57, 255, 20, 0.32),
+      0 0 55px rgba(184, 41, 234, 0.38),
+      inset 0 0 22px rgba(184, 41, 234, 0.25);
   }
-  .sector-tag {
+
+  .header-block {
     text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #df66ff;
-    text-shadow: 0 0 10px #b829ea;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #080212;
-    border: 2px solid #b829ea;
-    border-radius: 12px;
-    padding: 8px 14px;
-    margin-bottom: 10px;
-  }
-  .credits-box { font-size: 21px; font-weight: bold; color: #39ff14; text-shadow: 0 0 12px rgba(57, 255, 20, 0.9); }
-  .sound-btn {
-    background: rgba(184, 41, 234, 0.22);
-    border: 2px solid #df66ff;
-    color: #df66ff;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: bold;
-  }
-  .sound-btn:hover { background: #b829ea; color: #ffffff; }
-  .casino-title {
-    text-align: center;
-    font-size: 26px;
+
+  .main-title {
+    font-size: 22px;
     font-weight: bold;
     letter-spacing: 2px;
     color: #39ff14;
-    text-shadow: 0 0 14px #39ff14, 0 0 28px #b829ea;
-    margin-bottom: 10px;
+    text-shadow: 0 0 12px #39ff14, 0 0 24px #b829ea;
   }
-  .reels-frame {
+
+  .sub-title {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: #df66ff;
+    margin-top: 3px;
+  }
+
+  /* Строка статуса и баланса как DCK / OUT в примере */
+  .stats-bar {
     display: flex;
-    justify-content: center;
-    gap: 18px;
-    background: linear-gradient(180deg, #05010e 0%, #170633 100%);
-    border: 3px solid #b829ea;
-    border-radius: 18px;
-    padding: 16px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 24px rgba(184, 41, 234, 0.45), inset 0 0 25px rgba(57, 255, 20, 0.2);
+    justify-content: space-between;
+    align-items: center;
+    background: #080314;
+    border: 1px solid #b829ea;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    font-size: 14px;
   }
-  .digit-cell {
-    width: 165px;
-    height: 165px;
-    background: linear-gradient(180deg, #0a0319 0%, #240c52 50%, #0a0319 100%);
-    border: 3px solid #39ff14;
-    border-radius: 16px;
+
+  .credits-label {
+    color: #c8a2ff;
+  }
+
+  .credits-value {
+    color: #39ff14;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.75);
+  }
+
+  .sound-toggle {
+    background: rgba(184, 41, 234, 0.2);
+    border: 1px solid #df66ff;
+    color: #df66ff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .sound-toggle:hover {
+    background: #b829ea;
+    color: #fff;
+  }
+
+  /* Окошки барабанов с крупными цифрами */
+  .reels-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background: linear-gradient(180deg, #060211 0%, #160730 100%);
+    border: 2px solid #b829ea;
+    border-radius: 14px;
+    padding: 16px 14px;
+    margin-bottom: 12px;
+    box-shadow: inset 0 0 24px rgba(57, 255, 20, 0.16);
+  }
+
+  .reel-cell {
+    aspect-ratio: 1 / 1.12;
+    background: linear-gradient(180deg, #0b041c 0%, #230c4d 50%, #0b041c 100%);
+    border: 2px solid #39ff14;
+    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 135px;
+    font-size: clamp(68px, 16vw, 102px);
     line-height: 1;
     font-weight: bold;
     color: #39ff14;
-    text-shadow: 0 0 20px #39ff14, 0 0 38px #b829ea;
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.25), inset 0 0 20px rgba(57, 255, 20, 0.3);
+    text-shadow: 0 0 16px #39ff14, 0 0 30px #b829ea;
+    box-shadow: inset 0 0 14px rgba(57, 255, 20, 0.25);
     user-select: none;
   }
-  .reels-frame.spinning .digit-cell { border-color: #df66ff; color: #df66ff; text-shadow: 0 0 25px #df66ff; }
-  .reels-frame.win .digit-cell {
+
+  .reels-box.spinning .reel-cell {
+    border-color: #df66ff;
+    color: #df66ff;
+    text-shadow: 0 0 20px #df66ff;
+  }
+
+  .reels-box.win .reel-cell {
     background: linear-gradient(180deg, #072907 0%, #155715 50%, #072907 100%);
     border-color: #39ff14;
     color: #39ff14;
     transform: scale(1.03);
   }
-  .reels-frame.jackpot .digit-cell {
+
+  .reels-box.jackpot .reel-cell {
     border-color: #ffe600;
     color: #ffe600;
-    text-shadow: 0 0 28px #ffe600, 0 0 50px #b829ea;
+    text-shadow: 0 0 24px #ffe600, 0 0 42px #b829ea;
     transform: scale(1.05);
   }
-  .status-line {
+
+  .message-bar {
     text-align: center;
-    min-height: 22px;
-    font-size: 16px;
+    min-height: 20px;
+    font-size: 13px;
     font-weight: bold;
-    margin-bottom: 10px;
     color: #df66ff;
-    text-shadow: 0 0 10px rgba(184, 41, 234, 0.85);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
   }
-  .controls { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-bottom: 10px; }
-  .btn {
-    padding: 12px 12px;
-    border-radius: 12px;
-    font-size: 17px;
+
+  /* Кнопки управления */
+  .actions-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .action-btn {
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .action-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
   .btn-spin {
     background: linear-gradient(135deg, #25b80c, #39ff14);
     border: 2px solid #b5ffa6;
     color: #041402;
-    box-shadow: 0 0 18px rgba(57, 255, 20, 0.6);
+    box-shadow: 0 0 16px rgba(57, 255, 20, 0.5);
   }
+
+  .btn-spin:hover:not(:disabled) {
+    box-shadow: 0 0 24px rgba(57, 255, 20, 0.9);
+  }
+
   .btn-auto {
-    background: rgba(184, 41, 234, 0.22);
+    background: rgba(184, 41, 234, 0.2);
     border: 2px solid #df66ff;
     color: #f3c6ff;
   }
-  .btn-auto.active { background: #b829ea; color: #ffffff; box-shadow: 0 0 24px #b829ea; }
-  .footer-bar {
+
+  .btn-auto.active {
+    background: #b829ea;
+    color: #ffffff;
+    box-shadow: 0 0 20px #b829ea;
+  }
+
+  /* Нижняя панель как в примере */
+  .bottom-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
-    border-top: 2px dashed rgba(184, 41, 234, 0.6);
-    font-size: 13px;
-    color: #c8a2ff;
+    border-top: 1px dashed rgba(184, 41, 234, 0.55);
+    font-size: 12px;
+    color: #b794f4;
   }
-  .rules-trigger {
-    background: rgba(57, 255, 20, 0.14);
-    border: 2px solid #39ff14;
+
+  .rules-link-btn {
+    background: transparent;
+    border: 1px solid #39ff14;
     color: #39ff14;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
   }
-  .rules-trigger:hover { background: #39ff14; color: #05020d; }
-  .modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(3, 1, 9, 0.9); display: none; justify-content: center; align-items: center;
-    padding: 12px; z-index: 9999;
+
+  .rules-link-btn:hover {
+    background: #39ff14;
+    color: #05020d;
   }
-  .modal-window {
-    width: 100%; max-width: 540px; background: #100624; border: 3px solid #df66ff;
-    border-radius: 20px; padding: 20px 24px;
-    box-shadow: 0 0 40px rgba(184, 41, 234, 0.75);
-    max-height: 92vh; overflow-y: auto;
+
+  /* Всплывающее окно правил как в примере */
+  .rules-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 1, 9, 0.88);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    z-index: 9999;
   }
-  .modal-header {
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 2px solid rgba(57, 255, 20, 0.4); padding-bottom: 10px; margin-bottom: 12px;
+
+  .rules-dialog {
+    width: 100%;
+    max-width: 440px;
+    background: #0e0521;
+    border: 2px solid #df66ff;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 0 35px rgba(184, 41, 234, 0.65);
+    max-height: 92vh;
+    overflow-y: auto;
   }
-  .modal-title { font-size: 18px; font-weight: bold; color: #39ff14; }
-  .modal-close {
-    background: transparent; border: 2px solid #df66ff; color: #df66ff;
-    width: 32px; height: 32px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;
+
+  .rules-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.35);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
   }
-  .rules-list { list-style: none; margin-bottom: 12px; font-size: 14px; line-height: 1.5; }
-  .rules-list li { margin-bottom: 5px; }
-  .payout-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 14px; }
-  .payout-table th, .payout-table td { border: 1px solid rgba(184, 41, 234, 0.6); padding: 6px 8px; text-align: center; }
-  .payout-table th { background: rgba(184, 41, 234, 0.35); color: #39ff14; }
-  .payout-table tr.jackpot-row td { color: #ffe600; font-weight: bold; background: rgba(255, 230, 0, 0.12); border-color: #ffe600; }
-  .modal-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+
+  .rules-head h3 {
+    font-size: 16px;
+    color: #39ff14;
+  }
+
+  .close-x {
+    background: transparent;
+    border: 1px solid #df66ff;
+    color: #df66ff;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .rules-bullets {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .rules-bullets li {
+    margin-bottom: 6px;
+  }
+
+  .payout-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .payout-grid th,
+  .payout-grid td {
+    border: 1px solid rgba(184, 41, 234, 0.5);
+    padding: 6px 8px;
+    text-align: center;
+  }
+
+  .payout-grid th {
+    background: rgba(184, 41, 234, 0.28);
+    color: #39ff14;
+  }
+
+  .payout-grid tr.jp-row td {
+    color: #ffe600;
+    font-weight: bold;
+    background: rgba(255, 230, 0, 0.1);
+    border-color: #ffe600;
+  }
+
+  .modal-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
 </style>
 </head>
 <body>
 
-<div class="terminal">
-  <div class="sector-tag">XENO-ORBITAL SECTOR 7G // ALIEN CASINO</div>
-
-  <div class="top-bar">
-    <div class="credits-box">CREDITS: <span id="creditsVal">100</span></div>
-    <button type="button" class="sound-btn" id="soundToggle">SOUND: ON</button>
+<div class="oracle-card">
+  <div class="header-block">
+    <div class="main-title">👽 IJINDRZHIH CASINO 👽</div>
+    <div class="sub-title">🛸 ALIEN SECTOR 7G • 777 ORACLE 👾</div>
   </div>
 
-  <div class="casino-title">IJINDRZHIH CASINO</div>
-
-  <div class="reels-frame" id="reelsFrame">
-    <div class="digit-cell" id="d0">0</div>
-    <div class="digit-cell" id="d1">0</div>
-    <div class="digit-cell" id="d2">0</div>
+  <div class="stats-bar">
+    <div><span class="credits-label">CREDITS:</span> <span class="credits-value" id="creditsVal">100</span></div>
+    <button type="button" class="sound-toggle" id="soundToggle">🔊 ЗВУК: ВКЛ</button>
   </div>
 
-  <div class="status-line" id="statusLine">PRESS SPACE OR SPIN</div>
-
-  <div class="controls">
-    <button type="button" class="btn btn-spin" id="spinBtn">SPIN (-10)</button>
-    <button type="button" class="btn btn-auto" id="autoBtn">AUTO: OFF</button>
+  <div class="reels-box" id="reelsFrame">
+    <div class="reel-cell" id="d0">0</div>
+    <div class="reel-cell" id="d1">0</div>
+    <div class="reel-cell" id="d2">0</div>
   </div>
 
-  <div class="footer-bar">
-    <span>START: <strong>Space</strong> | RULES: <strong>Esc</strong></span>
-    <button type="button" class="rules-trigger" id="openRulesBtn">Правила игры</button>
+  <div class="message-bar" id="statusLine">НАЖМИ [SPACE] ИЛИ SPIN</div>
+
+  <div class="actions-row">
+    <button type="button" class="action-btn btn-spin" id="spinBtn">SPIN (-10)</button>
+    <button type="button" class="action-btn btn-auto" id="autoBtn">AUTO: ВЫКЛ</button>
+  </div>
+
+  <div class="bottom-nav">
+    <span>СТАРТ (Space) • АВТО • СБРОС (Esc)</span>
+    <button type="button" class="rules-link-btn" id="openRulesBtn">[ Правила игры ]</button>
   </div>
 </div>
 
-<div class="modal-overlay" id="rulesModal">
-  <div class="modal-window">
-    <div class="modal-header">
-      <div class="modal-title">ПРАВИЛА «IJINDRZHIH CASINO»</div>
-      <button type="button" class="modal-close" id="closeRulesTop">X</button>
+<!-- ВСПЛЫВАЮЩЕЕ ОКНО ПРАВИЛ -->
+<div class="rules-modal" id="rulesModal">
+  <div class="rules-dialog">
+    <div class="rules-head">
+      <h3>🛸 ПРАВИЛА «IJINDRZHIH CASINO»</h3>
+      <button type="button" class="close-x" id="closeRulesTop">✕</button>
     </div>
 
-    <ul class="rules-list">
-      <li>Стартовый баланс: <strong style="color:#39ff14" id="ruleStart">100</strong> кредитов.</li>
-      <li>Стоимость вращения (SPIN): <strong style="color:#df66ff" id="ruleCost">10</strong> кредитов.</li>
-      <li>Шанс призовой тройки: <strong style="color:#39ff14" id="ruleChance">35%</strong>.</li>
-      <li>Числа от <strong>1</strong> до <strong>7</strong>. Награда за 3 одинаковые цифры:</li>
+    <ul class="rules-bullets">
+      <li>👽 Стартовый баланс: <strong style="color:#39ff14" id="ruleStart">100</strong> кредитов.</li>
+      <li>👾 Стоимость вращения (SPIN): <strong style="color:#df66ff" id="ruleCost">10</strong> кредитов.</li>
+      <li>🛸 Шанс выпадения призовой тройки: <strong style="color:#39ff14" id="ruleChance">35%</strong>.</li>
+      <li>⚡ На каждом барабане выпадают цифры от <strong>1</strong> до <strong>7</strong>. Приз даётся за три одинаковые цифры:</li>
     </ul>
 
-    <table class="payout-table">
+    <table class="payout-grid">
       <thead>
         <tr>
           <th>Комбинация</th>
-          <th>Выигрыш</th>
-          <th>Шанс в призах</th>
+          <th>Награда</th>
+          <th>Вес в призах</th>
         </tr>
       </thead>
       <tbody>
@@ -253,23 +395,20 @@
         <tr><td><strong>444</strong></td><td id="rew444">+200</td><td>13%</td></tr>
         <tr><td><strong>555</strong></td><td id="rew555">+350</td><td>9%</td></tr>
         <tr><td><strong>666</strong></td><td id="rew666">+500</td><td>5%</td></tr>
-        <tr class="jackpot-row"><td><strong>777</strong></td><td id="rew777">+10000</td><td>3% (JACKPOT)</td></tr>
+        <tr class="jp-row"><td><strong>777</strong></td><td id="rew777">+10000</td><td>3% (ДЖЕКПОТ)</td></tr>
       </tbody>
     </table>
 
-    <div class="modal-actions">
-      <button type="button" class="rules-trigger" id="resetBtn">Пополнить (<span id="resetAmount">100</span>)</button>
-      <button type="button" class="sound-btn" id="closeRulesBottom">Закрыть</button>
-    </div>
-  </div>
-</div>
+    <div class="modal-foot">
+♻️ Пополнить (100)
+Закрыть (Esc)
 
-<script>
+
+// ================= НАСТРОЙКИ ИГРЫ (МЕНЯТЬ ЗДЕСЬ) =================
 var START_CREDITS = 100;
 var SPIN_COST = 10;
 var WIN_CHANCE_PERCENT = 35;
 var SPIN_DURATION_MS = 1400;
-
 var REWARD_111 = 10;
 var REWARD_222 = 20;
 var REWARD_333 = 100;
@@ -277,7 +416,7 @@ var REWARD_444 = 200;
 var REWARD_555 = 350;
 var REWARD_666 = 500;
 var REWARD_777 = 10000;
-
+// =================================================================
 var credits = START_CREDITS;
 var isSpinning = false;
 var autoMode = false;
@@ -285,9 +424,8 @@ var autoTimer = null;
 var spinInterval = null;
 var soundEnabled = true;
 var audioCtx = null;
-
 function getReward(d) {
-  if (d === 1) return REWARD_111;
+if (d === 1) return REWARD_111;
 if (d === 2) return REWARD_222;
 if (d === 3) return REWARD_333;
 if (d === 4) return REWARD_444;
@@ -300,12 +438,12 @@ function rnd(min, max) {
 return Math.floor(Math.random() * (max - min)) + min;
 }
 function setDigits(a, b, c) {
-document.getElementById("d0").innerHTML = a;
-document.getElementById("d1").innerHTML = b;
-document.getElementById("d2").innerHTML = c;
+document.getElementById("d0").textContent = a;
+document.getElementById("d1").textContent = b;
+document.getElementById("d2").textContent = c;
 }
 function updateCredits() {
-document.getElementById("creditsVal").innerHTML = credits;
+document.getElementById("creditsVal").textContent = credits;
 }
 function playTone(freq, ms) {
 if (!soundEnabled) return;
@@ -332,14 +470,14 @@ function stopAuto() {
 autoMode = false;
 clearTimeout(autoTimer);
 var ab = document.getElementById("autoBtn");
-ab.className = "btn btn-auto";
-ab.innerHTML = "AUTO: OFF";
+ab.className = "action-btn btn-auto";
+ab.textContent = "AUTO: ВЫКЛ";
 }
 function finishSpin() {
 var st = document.getElementById("statusLine");
 var rf = document.getElementById("reelsFrame");
 var sb = document.getElementById("spinBtn");
-rf.className = "reels-frame";
+rf.className = "reels-box";
 var d1 = rnd(1, 8);
 var d2 = rnd(1, 8);
 var d3 = rnd(1, 8);
@@ -361,18 +499,18 @@ var rew = (d1 === d2 && d2 === d3) ? getReward(d1) : 0;
 credits += rew;
 updateCredits();
 if (rew === REWARD_777) {
-rf.className = "reels-frame jackpot";
-st.innerHTML = "MEGA JACKPOT 777! +" + rew + " CREDITS!";
+rf.className = "reels-box jackpot";
+st.textContent = "👾 ДЖЕКПОТ 777! +" + rew + " КРЕДИТОВ!";
 playTone(400, 150);
 setTimeout(function () { playTone(800, 150); }, 210);
 setTimeout(function () { playTone(1600, 250); }, 420);
 } else if (rew > 0) {
-rf.className = "reels-frame win";
-st.innerHTML = "WIN (" + d1 + d2 + d3 + ")! +" + rew + " CREDITS!";
+rf.className = "reels-box win";
+st.textContent = "👽 ПОБЕДА (" + d1 + d2 + d3 + ")! +" + rew + " КРЕДИТОВ!";
 playTone(500, 120);
 setTimeout(function () { playTone(900, 160); }, 170);
 } else {
-st.innerHTML = "EMPTY SECTOR. PRESS SPACE!";
+st.textContent = "МИМО. ЖМИ [SPACE] ИЛИ SPIN!";
 }
 isSpinning = false;
 sb.disabled = false;
@@ -381,7 +519,7 @@ if (credits >= SPIN_COST) {
 autoTimer = setTimeout(startSpin, 650);
 } else {
 stopAuto();
-st.innerHTML = "AUTO STOPPED: NO CREDITS";
+st.textContent = "АВТО ОСТАНОВЛЕНО: НЕТ КРЕДИТОВ";
 }
 }
 }
@@ -391,20 +529,20 @@ var st = document.getElementById("statusLine");
 var rf = document.getElementById("reelsFrame");
 var sb = document.getElementById("spinBtn");
 if (credits < SPIN_COST) {
-st.innerHTML = "NO CREDITS! OPEN RULES";
+st.textContent = "НЕ ХВАТАЕТ КРЕДИТОВ! ОТКРОЙ ПРАВИЛА";
 stopAuto();
 playTone(150, 250);
 return;
 }
 isSpinning = true;
 sb.disabled = true;
-rf.className = "reels-frame spinning";
+rf.className = "reels-box spinning";
 credits -= SPIN_COST;
 updateCredits();
-st.innerHTML = "SPINNING...";
-var t0 = new Date().getTime();
+st.textContent = "🛸 КВАНТОВАЯ ПРОКРУТКА...";
+var t0 = Date.now();
 spinInterval = setInterval(function () {
-if (new Date().getTime() - t0 >= SPIN_DURATION_MS) {
+if (Date.now() - t0 >= SPIN_DURATION_MS) {
 clearInterval(spinInterval);
 finishSpin();
 return;
@@ -413,87 +551,82 @@ setDigits(rnd(1, 8), rnd(1, 8), rnd(1, 8));
 playTone(220, 15);
 }, 50);
 }
-document.getElementById("ruleStart").innerHTML = START_CREDITS;
-document.getElementById("ruleCost").innerHTML = SPIN_COST;
-document.getElementById("ruleChance").innerHTML = WIN_CHANCE_PERCENT + "%";
-document.getElementById("resetAmount").innerHTML = START_CREDITS;
-document.getElementById("spinBtn").innerHTML = "SPIN (-" + SPIN_COST + ")";
-document.getElementById("rew111").innerHTML = "+" + REWARD_111;
-document.getElementById("rew222").innerHTML = "+" + REWARD_222;
-document.getElementById("rew333").innerHTML = "+" + REWARD_333;
-document.getElementById("rew444").innerHTML = "+" + REWARD_444;
-document.getElementById("rew555").innerHTML = "+" + REWARD_555;
-document.getElementById("rew666").innerHTML = "+" + REWARD_666;
-document.getElementById("rew777").innerHTML = "+" + REWARD_777;
+document.getElementById("ruleStart").textContent = START_CREDITS;
+document.getElementById("ruleCost").textContent = SPIN_COST;
+document.getElementById("ruleChance").textContent = WIN_CHANCE_PERCENT + "%";
+document.getElementById("resetAmount").textContent = START_CREDITS;
+document.getElementById("spinBtn").textContent = "SPIN (-" + SPIN_COST + ")";
+document.getElementById("rew111").textContent = "+" + REWARD_111;
+document.getElementById("rew222").textContent = "+" + REWARD_222;
+document.getElementById("rew333").textContent = "+" + REWARD_333;
+document.getElementById("rew444").textContent = "+" + REWARD_444;
+document.getElementById("rew555").textContent = "+" + REWARD_555;
+document.getElementById("rew666").textContent = "+" + REWARD_666;
+document.getElementById("rew777").textContent = "+" + REWARD_777;
 updateCredits();
 setDigits(rnd(1, 8), rnd(1, 8), rnd(1, 8));
-document.getElementById("statusLine").innerHTML = "SYSTEM READY - PRESS SPACE OR SPIN";
-document.getElementById("spinBtn").onclick = function () {
+document.getElementById("statusLine").textContent = "СИСТЕМА ГОТОВА • ЖМИ [SPACE]";
+document.getElementById("spinBtn").addEventListener("click", function () {
 this.blur();
 if (autoMode) stopAuto();
 startSpin();
-};
-document.getElementById("autoBtn").onclick = function () {
+});
+document.getElementById("autoBtn").addEventListener("click", function () {
 this.blur();
 if (autoMode) {
 stopAuto();
 return;
 }
 if (credits < SPIN_COST) {
-document.getElementById("statusLine").innerHTML = "NO CREDITS FOR AUTO";
+document.getElementById("statusLine").textContent = "НЕТ КРЕДИТОВ ДЛЯ АВТО";
 return;
 }
 autoMode = true;
-this.className = "btn btn-auto active";
-this.innerHTML = "AUTO: ON";
+this.className = "action-btn btn-auto active";
+this.textContent = "AUTO: ВКЛ";
 if (!isSpinning) startSpin();
-};
-document.getElementById("soundToggle").onclick = function () {
+});
+document.getElementById("soundToggle").addEventListener("click", function () {
 this.blur();
 soundEnabled = !soundEnabled;
-this.innerHTML = soundEnabled ? "SOUND: ON" : "SOUND: OFF";
-};
-document.getElementById("openRulesBtn").onclick = function () {
+this.textContent = soundEnabled ? "🔊 ЗВУК: ВКЛ" : "🔇 ЗВУК: ВЫКЛ";
+});
+document.getElementById("openRulesBtn").addEventListener("click", function () {
 this.blur();
 document.getElementById("rulesModal").style.display = "flex";
-};
-document.getElementById("closeRulesTop").onclick = function () {
+});
+document.getElementById("closeRulesTop").addEventListener("click", function () {
 document.getElementById("rulesModal").style.display = "none";
-};
-document.getElementById("closeRulesBottom").onclick = function () {
+});
+document.getElementById("closeRulesBottom").addEventListener("click", function () {
 document.getElementById("rulesModal").style.display = "none";
-};
-document.getElementById("rulesModal").onclick = function (e) {
-e = e || window.event;
-var target = e.target || e.srcElement;
-if (target === this) this.style.display = "none";
-};
-document.getElementById("resetBtn").onclick = function () {
+});
+document.getElementById("rulesModal").addEventListener("click", function (e) {
+if (e.target === this) this.style.display = "none";
+});
+document.getElementById("resetBtn").addEventListener("click", function () {
 stopAuto();
 credits = START_CREDITS;
 updateCredits();
-document.getElementById("reelsFrame").className = "reels-frame";
-document.getElementById("statusLine").innerHTML = "CREDITS RESTORED";
+document.getElementById("reelsFrame").className = "reels-box";
+document.getElementById("statusLine").textContent = "БАЛАНС ВОССТАНОВЛЕН";
 playTone(600, 100);
 document.getElementById("rulesModal").style.display = "none";
-};
-document.onkeydown = function (e) {
-e = e || window.event;
-var k = e.keyCode || e.which;
+});
+window.addEventListener("keydown", function (e) {
 var modal = document.getElementById("rulesModal");
-if (k === 27 && modal.style.display === "flex") {
-if (e.preventDefault) e.preventDefault();
+if (e.code === "Escape" && modal.style.display === "flex") {
+e.preventDefault();
 modal.style.display = "none";
-return false;
+return;
 }
 if (modal.style.display === "flex") return;
-if (k === 32 || k === 40 || e.code === "Space" || e.key === " ") {
-if (e.preventDefault) e.preventDefault();
+if (e.code === "Space" || e.key === " " || e.code === "ArrowDown") {
+e.preventDefault();
 if (autoMode) {
 stopAuto();
-return false;
+return;
 }
 if (!isSpinning) startSpin();
-return false;
 }
-};
+});
