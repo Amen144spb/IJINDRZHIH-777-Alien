@@ -6,15 +6,16 @@
   <title>IJINDRZHIH CASINO — Alien Sector</title>
   <style>
     :root {
-      --bg: #070b14;
-      --panel: #0e1628;
-      --border: #1e325c;
+      --bg: #04070d;
+      --panel: #071915;
+      --border: #196b58;
       --accent: #00f0ff;
       --green: #00ff88;
-      --gold: #ffd700;
-      --danger: #ff3b6b;
-      --text: #e2e8f0;
-      --muted: #7b8ba8;
+      --gold: #f5b727;
+      --purple: #7c3aed;
+      --danger: #ff2a55;
+      --text: #e2f5f0;
+      --muted: #7ab3a5;
     }
 
     * {
@@ -25,32 +26,174 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at center, #101b33 0%, var(--bg) 100%);
+      background-color: #03060c;
+      background-image:
+        radial-gradient(circle at 12% 20%, rgba(168, 85, 247, 0.16) 0%, transparent 38%),
+        radial-gradient(circle at 88% 80%, rgba(0, 255, 136, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 82% 18%, rgba(255, 42, 85, 0.14) 0%, transparent 32%),
+        radial-gradient(circle at 18% 85%, rgba(0, 240, 255, 0.14) 0%, transparent 35%),
+        linear-gradient(rgba(0, 255, 136, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
       color: var(--text);
       font-family: 'Courier New', Courier, monospace;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 28px;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    .machine {
+    .bg-art {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-art svg {
       width: 100%;
-      max-width: 680px;
-      background: var(--panel);
-      border: 3px solid var(--border);
+      height: 100%;
+    }
+
+    .laser-triad {
+      position: fixed;
+      width: 34px;
+      height: 30px;
+      pointer-events: none;
+      z-index: 1;
+      animation: pulseLaser 2.6s ease-in-out infinite;
+    }
+
+    .laser-triad span {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff1e42;
+      box-shadow: 0 0 8px #ff1e42, 0 0 16px #ff002b;
+    }
+
+    .laser-triad span:nth-child(1) { top: 0; left: 14px; }
+    .laser-triad span:nth-child(2) { bottom: 0; left: 2px; }
+    .laser-triad span:nth-child(3) { bottom: 0; right: 2px; }
+
+    .triad-tl { top: 6%; left: 14%; }
+    .triad-tr { top: 9%; right: 15%; animation-delay: 0.7s; }
+    .triad-bl { bottom: 10%; left: 16%; animation-delay: 1.4s; }
+    .triad-br { bottom: 7%; right: 13%; animation-delay: 2.1s; }
+
+    @keyframes pulseLaser {
+      0%, 100% { opacity: 0.55; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Корпус-печатная плата */
+    .machine {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 760px;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(168, 85, 247, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 80% 85%, rgba(0, 255, 136, 0.16) 0%, transparent 48%),
+        linear-gradient(155deg, #07221b 0%, #051412 52%, #0c1026 100%);
+      border: 3px solid #228b70;
       border-radius: 22px;
-      padding: 32px;
-      box-shadow: 0 0 45px rgba(0, 240, 255, 0.16), inset 0 0 25px rgba(0, 0, 0, 0.7);
+      padding: 38px 42px;
+      box-shadow:
+        0 0 0 2px #040a09,
+        0 0 0 4px rgba(245, 183, 39, 0.35),
+        0 0 55px rgba(0, 255, 136, 0.18),
+        inset 0 0 35px rgba(0, 0, 0, 0.85);
       text-align: center;
+    }
+
+    .pcb-traces {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border-radius: 19px;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    .pcb-pins {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+    }
+
+    .pcb-pins.top { top: -7px; }
+    .pcb-pins.bottom { bottom: -7px; }
+
+    .pcb-pins span {
+      width: 12px;
+      height: 7px;
+      background: linear-gradient(180deg, #ffd966, #b8860b);
+      border: 1px solid #4a3500;
+      border-radius: 2px;
+      box-shadow: 0 0 6px rgba(245, 183, 39, 0.5);
+    }
+
+    .screw {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #3d5a52, #0b1714);
+      border: 2px solid #d49b27;
+      box-shadow: inset 0 0 4px #000, 0 0 6px rgba(245, 183, 39, 0.45);
+      z-index: 3;
+    }
+
+    .screw::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      right: 2px;
+      height: 2px;
+      background: #122420;
+      transform: translateY(-50%) rotate(35deg);
+    }
+
+    .screw.tl { top: 12px; left: 12px; }
+    .screw.tr { top: 12px; right: 12px; }
+    .screw.bl { bottom: 12px; left: 12px; }
+    .screw.br { bottom: 12px; right: 12px; }
+
+    .machine > *:not(.pcb-traces):not(.pcb-pins):not(.screw) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .bio-badge {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.65));
     }
 
     .header h1 {
       margin: 0;
-      font-size: 2.1rem;
+      font-size: 2.25rem;
       letter-spacing: 3px;
       color: var(--accent);
-      text-shadow: 0 0 14px rgba(0, 240, 255, 0.55);
+      text-shadow: 0 0 14px rgba(0, 240, 255, 0.65), 0 0 28px rgba(168, 85, 247, 0.4);
     }
 
     .subtitle {
@@ -58,6 +201,31 @@
       color: var(--muted);
       margin-top: 8px;
       letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .mini-triad {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .mini-triad i {
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ff2a55;
+      box-shadow: 0 0 6px #ff2a55;
+    }
+
+    .mini-triad div {
+      display: flex;
+      gap: 4px;
     }
 
     .status-bar {
@@ -65,23 +233,45 @@
       justify-content: space-between;
       align-items: center;
       margin: 24px 0 20px;
-      padding: 14px 20px;
-      background: #080d1a;
-      border: 2px solid var(--border);
+      padding: 15px 22px;
+      background: rgba(5, 14, 13, 0.92);
+      border: 2px solid #207561;
       border-radius: 12px;
       font-weight: bold;
+      box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.85);
+    }
+
+    .credits-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .led-power {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 8px #00ff88, 0 0 16px #00ff88;
+      animation: ledBlink 1.8s infinite ease-in-out;
+    }
+
+    @keyframes ledBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
     }
 
     .credits {
       color: var(--green);
-      font-size: 1.45rem;
+      font-size: 1.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
     }
 
     .sound-btn {
-      background: transparent;
-      border: 1px solid var(--border);
+      background: rgba(11, 28, 25, 0.95);
+      border: 1px solid #25846e;
       color: var(--text);
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 8px;
       cursor: pointer;
       font-family: inherit;
@@ -89,79 +279,146 @@
     }
 
     .sound-btn:hover {
-      border-color: var(--accent);
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(245, 183, 39, 0.35);
+    }
+
+    .reels-frame {
+      position: relative;
+      margin: 22px 0;
+      padding: 14px;
+      background: linear-gradient(135deg, #061311 0%, #090d1e 50%, #061311 100%);
+      border: 2px solid #268c74;
+      border-radius: 18px;
+      box-shadow:
+        0 0 22px rgba(0, 255, 136, 0.14),
+        inset 0 0 22px rgba(0, 0, 0, 0.95);
+    }
+
+    .frame-tags {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #62b8a3;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      padding: 0 6px;
+    }
+
+    .pinout-bar {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      font-size: 0.7rem;
+      color: #d49b27;
+      letter-spacing: 1px;
+      margin-top: 8px;
+      opacity: 0.85;
     }
 
     .reels {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin: 22px 0;
-      padding: 24px;
-      background: #050811;
-      border: 2px solid #18284a;
-      border-radius: 16px;
-      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+      padding: 18px;
+      background: #04080d;
+      border: 1px solid #174c40;
+      border-radius: 12px;
+      position: relative;
     }
 
     .reel {
-      height: 155px;
+      height: 185px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 5.5rem;
-      font-weight: bold;
-      color: var(--accent);
-      background: #0b1222;
-      border: 2px solid #1a2c50;
+      background: radial-gradient(circle at center, #0c1528 0%, #060913 100%);
+      border: 2px solid #1d5749;
       border-radius: 12px;
-      text-shadow: 0 0 16px rgba(0, 240, 255, 0.5);
-      transition: transform 0.1s, color 0.2s;
+      box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9);
+      transition: transform 0.1s, border-color 0.2s, box-shadow 0.2s;
+      padding: 14px;
+    }
+
+    /* Угловатые жирные инопланетные цифры (SVG-глифы) */
+    .alien-glyph {
+      width: 100%;
+      height: 100%;
+      max-width: 118px;
+      max-height: 152px;
+      fill: none;
+      stroke: #7c3aed;
+      stroke-width: 15;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.55));
+      transition: stroke 0.2s, filter 0.2s;
+    }
+
+    .alien-glyph .core-line {
+      stroke: #4c1d95;
+      stroke-width: 5;
     }
 
     .reel.win {
-      color: var(--green);
       border-color: var(--green);
-      text-shadow: 0 0 22px rgba(0, 255, 136, 0.85);
+      box-shadow: 0 0 22px rgba(0, 255, 136, 0.35), inset 0 0 18px rgba(0, 255, 136, 0.18);
       transform: scale(1.04);
     }
 
+    .reel.win .alien-glyph {
+      stroke: var(--green);
+      filter: drop-shadow(0 0 16px rgba(0, 255, 136, 0.85));
+    }
+
+    .reel.win .alien-glyph .core-line {
+      stroke: #064e3b;
+    }
+
     .reel.jackpot {
-      color: var(--gold);
       border-color: var(--gold);
-      text-shadow: 0 0 26px rgba(255, 215, 0, 0.95);
+      box-shadow: 0 0 28px rgba(245, 183, 39, 0.45), inset 0 0 22px rgba(245, 183, 39, 0.25);
       transform: scale(1.07);
     }
 
-    .message {
-      min-height: 32px;
-      margin: 18px 0;
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: var(--text);
-      letter-spacing: 0.8px;
+    .reel.jackpot .alien-glyph {
+      stroke: var(--gold);
+      filter: drop-shadow(0 0 20px rgba(245, 183, 39, 0.95));
     }
 
-    .message.win { color: var(--green); }
-    .message.jackpot { color: var(--gold); }
-    .message.error { color: var(--danger); }
+    .reel.jackpot .alien-glyph .core-line {
+      stroke: #78350f;
+    }
+
+    .message {
+      min-height: 34px;
+      margin: 18px 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+
+    .message.win { color: var(--green); text-shadow: 0 0 12px rgba(0, 255, 136, 0.5); }
+    .message.jackpot { color: var(--gold); text-shadow: 0 0 14px rgba(245, 183, 39, 0.75); }
+    .message.error { color: var(--danger); text-shadow: 0 0 12px rgba(255, 42, 85, 0.55); }
 
     .controls {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 14px;
+      gap: 16px;
       margin-top: 18px;
     }
 
     button.action-btn {
-      padding: 18px 16px;
+      padding: 19px 18px;
       font-family: inherit;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: bold;
       border-radius: 12px;
       cursor: pointer;
       border: none;
-      transition: opacity 0.15s, transform 0.08s;
+      transition: opacity 0.15s, transform 0.08s, box-shadow 0.2s;
     }
 
     button.action-btn:active {
@@ -174,25 +431,26 @@
     }
 
     .btn-spin {
-      background: var(--accent);
-      color: #04101a;
-      box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+      background: linear-gradient(90deg, #00f0ff, #00ff88);
+      color: #031214;
+      box-shadow: 0 0 22px rgba(0, 240, 255, 0.45);
     }
 
     .btn-auto {
-      background: #172645;
+      background: rgba(11, 28, 25, 0.95);
       color: var(--text);
-      border: 2px solid var(--border) !important;
+      border: 2px solid #25846e !important;
     }
 
     .btn-auto.active {
-      background: var(--green);
-      color: #041a0e;
+      background: linear-gradient(90deg, #a855f7, #00ff88);
+      color: #04140e;
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.45);
     }
 
     .footer-links {
-      margin-top: 22px;
-      font-size: 0.95rem;
+      margin-top: 24px;
+      font-size: 0.98rem;
       color: var(--muted);
       display: flex;
       justify-content: space-between;
@@ -204,9 +462,9 @@
     .link-btn {
       background: none;
       border: none;
-      color: var(--accent);
+      color: var(--gold);
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       cursor: pointer;
       text-decoration: underline;
       padding: 0;
@@ -215,7 +473,7 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(3, 6, 14, 0.85);
+      background: rgba(3, 6, 14, 0.88);
       display: none;
       align-items: center;
       justify-content: center;
@@ -228,15 +486,15 @@
     }
 
     .modal {
-      background: var(--panel);
-      border: 2px solid var(--accent);
+      background: linear-gradient(160deg, #07201a 0%, #0b1224 100%);
+      border: 2px solid #228b70;
       border-radius: 16px;
-      max-width: 520px;
+      max-width: 540px;
       width: 100%;
-      padding: 26px;
+      padding: 28px;
       position: relative;
       text-align: left;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.25);
     }
 
     .modal h3 {
@@ -260,26 +518,26 @@
     .modal ul {
       margin: 0 0 16px;
       padding-left: 20px;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       line-height: 1.6;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       margin-bottom: 18px;
     }
 
     th, td {
-      border: 1px solid var(--border);
+      border: 1px solid #1e6b58;
       padding: 8px 10px;
       text-align: center;
     }
 
     th {
-      background: #080d1a;
-      color: var(--accent);
+      background: #061411;
+      color: var(--gold);
     }
 
     .modal-actions {
@@ -289,7 +547,7 @@
 
     .modal-actions button {
       flex: 1;
-      padding: 12px;
+      padding: 13px;
       border-radius: 8px;
       border: none;
       font-family: inherit;
@@ -299,33 +557,167 @@
     }
 
     .btn-refill {
-      background: var(--green);
+      background: linear-gradient(90deg, #00ff88, #00f0ff);
       color: #041a0e;
     }
 
     .btn-close-bottom {
-      background: #1a2947;
+      background: #133830;
       color: var(--text);
+      border: 1px solid #228b70 !important;
     }
   </style>
 </head>
 <body>
 
+  <!-- Фоновая биомеханическая графика Alien / Predator -->
+  <div class="bg-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bioCyan" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.32" />
+          <stop offset="50%" stop-color="#a855f7" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="#00ff88" stop-opacity="0.28" />
+        </linearGradient>
+        <linearGradient id="bioAmber" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ff2a55" stop-opacity="0.30" />
+          <stop offset="50%" stop-color="#f5b727" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.25" />
+        </linearGradient>
+      </defs>
+
+      <!-- Биомеханические магистрали и ребра слева -->
+      <g stroke="url(#bioCyan)" stroke-width="2" fill="none">
+        <path d="M-20,120 L140,120 L190,170 L190,410 L130,470 L-20,470" />
+        <path d="M-20,145 L125,145 L168,188 L168,395 L118,445 L-20,445" />
+        <path d="M40,0 L40,95 L95,150" />
+        <path d="M85,900 L85,680 L155,610 L155,490" />
+        <path d="M120,900 L120,695 L180,635 L180,520" />
+        <path d="M25,220 C85,220 115,250 115,295 C115,340 85,370 25,370" stroke-width="3" />
+        <path d="M35,245 L95,245 M35,275 L105,275 M35,305 L105,305 M35,335 L95,335" />
+        <circle cx="190" cy="170" r="5" fill="#00f0ff" />
+        <circle cx="155" cy="610" r="5" fill="#a855f7" />
+      </g>
+
+      <!-- Биомеханические магистрали и ребра справа -->
+      <g stroke="url(#bioAmber)" stroke-width="2" fill="none">
+        <path d="M1460,150 L1300,150 L1245,205 L1245,460 L1310,525 L1460,525" />
+        <path d="M1460,175 L1315,175 L1270,220 L1270,445 L1325,500 L1460,500" />
+        <path d="M1380,0 L1380,115 L1320,175" />
+        <path d="M1345,900 L1345,670 L1275,600 L1275,510" />
+        <path d="M1310,900 L1310,685 L1250,625 L1250,535" />
+        <path d="M1415,260 C1355,260 1325,290 1325,340 C1325,390 1355,420 1415,420" stroke-width="3" />
+        <path d="M1405,290 L1340,290 M1405,325 L1332,325 M1405,360 L1332,360 M1405,395 L1340,395" />
+        <circle cx="1245" cy="205" r="5" fill="#ff2a55" />
+        <circle cx="1275" cy="600" r="5" fill="#f5b727" />
+      </g>
+
+      <!-- Угловые прицелы визора -->
+      <g stroke="#00ff88" stroke-opacity="0.25" stroke-width="1.5" fill="none">
+        <polygon points="240,65 265,65 252,88" />
+        <polygon points="1200,65 1175,65 1188,88" />
+        <polygon points="240,835 265,835 252,812" />
+        <polygon points="1200,835 1175,835 1188,812" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Лазерные триады Хищника -->
+  <div class="laser-triad triad-tl"><span></span><span></span><span></span></div>
+  <div class="laser-triad triad-tr"><span></span><span></span><span></span></div>
+  <div class="laser-triad triad-bl"><span></span><span></span><span></span></div>
+  <div class="laser-triad triad-br"><span></span><span></span><span></span></div>
+
   <div class="machine">
+    <!-- Дорожки печатной платы внутри корпуса -->
+    <svg class="pcb-traces" viewBox="0 0 760 660" preserveAspectRatio="none" aria-hidden="true">
+      <g stroke="#d49b27" stroke-opacity="0.32" stroke-width="1.6" fill="none">
+        <path d="M28,60 L120,60 L145,35 L310,35" />
+        <path d="M732,60 L640,60 L615,35 L450,35" />
+        <path d="M28,600 L130,600 L155,625 L310,625" />
+        <path d="M732,600 L630,600 L605,625 L450,625" />
+        <path d="M18,170 L45,195 L45,465 L18,490" />
+        <path d="M742,170 L715,195 L715,465 L742,490" />
+        <circle cx="120" cy="60" r="3.5" fill="#061411" />
+        <circle cx="640" cy="60" r="3.5" fill="#061411" />
+        <circle cx="130" cy="600" r="3.5" fill="#061411" />
+        <circle cx="630" cy="600" r="3.5" fill="#061411" />
+      </g>
+      <g stroke="#00ff88" stroke-opacity="0.28" stroke-width="1.4" fill="none">
+        <path d="M60,115 L210,115 L228,132 L532,132 L550,115 L700,115" />
+        <path d="M60,545 L210,545 L228,528 L532,528 L550,545 L700,545" />
+        <circle cx="228" cy="132" r="4" stroke="#d49b27" fill="#061411" />
+        <circle cx="532" cy="132" r="4" stroke="#d49b27" fill="#061411" />
+      </g>
+      <!-- SMD-чипы по бокам платы -->
+      <g fill="#081a16" stroke="#268c74" stroke-width="1.2">
+        <rect x="14" y="215" width="16" height="36" rx="2" />
+        <rect x="14" y="410" width="16" height="36" rx="2" />
+        <rect x="730" y="215" width="16" height="36" rx="2" />
+        <rect x="730" y="410" width="16" height="36" rx="2" />
+      </g>
+    </svg>
+
+    <!-- Золотые гребенки контактов -->
+    <div class="pcb-pins top"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="pcb-pins bottom"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <!-- Крепежные винты платы -->
+    <div class="screw tl"></div>
+    <div class="screw tr"></div>
+    <div class="screw bl"></div>
+    <div class="screw br"></div>
+
     <div class="header">
-      <h1>👽 IJINDRZHIH CASINO 👽</h1>
-      <div class="subtitle">🛸 ALIEN SECTOR 7G • 777 ORACLE 👾</div>
+      <div class="header-row">
+        <!-- Эмблема Ксеноморфа -->
+        <svg class="bio-badge" viewBox="0 0 36 36" fill="none">
+          <path d="M18 3C10 3 6 9 6 17C6 25 11 32 18 33C25 32 30 25 30 17C30 9 26 3 18 3Z" fill="#071915" stroke="#00ff88" stroke-width="2"/>
+          <path d="M11 16L15 20L11 22Z" fill="#00f0ff"/>
+          <path d="M25 16L21 20L25 22Z" fill="#00f0ff"/>
+          <path d="M15 26L18 24L21 26" stroke="#a855f7" stroke-width="1.8"/>
+        </svg>
+
+        <h1>IJINDRZHIH CASINO</h1>
+
+        <!-- Эмблема маски Хищника -->
+        <svg class="bio-badge" viewBox="0 0 36 36" fill="none">
+          <polygon points="18,3 30,11 28,27 18,33 8,27 6,11" fill="#071915" stroke="#a855f7" stroke-width="2"/>
+          <polyline points="10,15 15,18 11,21" stroke="#00f0ff" stroke-width="1.8"/>
+          <polyline points="26,15 21,18 25,21" stroke="#00f0ff" stroke-width="1.8"/>
+          <circle cx="18" cy="11" r="1.5" fill="#ff2a55"/>
+          <circle cx="15.5" cy="15" r="1.5" fill="#ff2a55"/>
+          <circle cx="20.5" cy="15" r="1.5" fill="#ff2a55"/>
+        </svg>
+      </div>
+      <div class="subtitle">
+        <span>ALIEN SECTOR 7G</span>
+        <span class="mini-triad"><i></i><div><i></i><i></i></div></span>
+        <span>PCB-777 ORACLE</span>
+      </div>
     </div>
 
     <div class="status-bar">
-      <div class="credits">CREDITS: <span id="creditsVal">100</span></div>
-      <button type="button" class="sound-btn" id="soundBtn">🔊 ЗВУК: ВКЛ</button>
+      <div class="credits-wrap">
+        <span class="led-power"></span>
+        <div class="credits">CREDITS: <span id="creditsVal">100</span></div>
+      </div>
+      <button type="button" class="sound-btn" id="soundBtn">ЗВУК: ВКЛ</button>
     </div>
 
-    <div class="reels">
-      <div class="reel" id="reel0">0</div>
-      <div class="reel" id="reel1">0</div>
-      <div class="reel" id="reel2">0</div>
+    <div class="reels-frame">
+      <div class="frame-tags">
+        <span>[ YAUTJA-CORE // MCU-432HZ ]</span>
+        <span>[ OLED-MATRIX // XENO-777 ]</span>
+      </div>
+      <div class="reels">
+        <div class="reel" id="reel0"></div>
+        <div class="reel" id="reel1"></div>
+        <div class="reel" id="reel2"></div>
+      </div>
+      <div class="pinout-bar">
+        <span>GND</span><span>VCC</span><span>SDA</span><span>SCL</span><span>D3</span><span>D11</span><span>A0</span><span>5V</span>
+      </div>
     </div>
 
     <div class="message" id="statusMsg">НАЖМИ SPACE ИЛИ SPIN</div>
@@ -341,15 +733,16 @@
     </div>
   </div>
 
+  <!-- Модальное окно правил -->
   <div class="modal-backdrop" id="rulesModal">
     <div class="modal">
       <button type="button" class="modal-close" id="closeRulesTop">✕</button>
-      <h3>🛸 ПРАВИЛА «IJINDRZHIH CASINO»</h3>
+      <h3>ПРАВИЛА «IJINDRZHIH CASINO»</h3>
       <ul>
-        <li>👽 Стартовый баланс: <strong id="ruleStartCredits">100</strong> кредитов.</li>
-        <li>👾 Стоимость вращения (SPIN): <strong id="ruleSpinCost">10</strong> кредитов.</li>
-        <li>🛸 Шанс выпадения призовой тройки: <strong id="ruleWinChance">35%</strong>.</li>
-        <li>⚡ На каждом барабане выпадают цифры от <strong>1</strong> до <strong>7</strong>. Приз даётся за три одинаковые цифры:</li>
+        <li>Стартовый баланс: <strong id="ruleStartCredits">100</strong> кредитов.</li>
+        <li>Стоимость вращения (SPIN): <strong id="ruleSpinCost">10</strong> кредитов.</li>
+        <li>Шанс выпадения призовой тройки: <strong id="ruleWinChance">100%</strong>.</li>
+        <li>На каждом барабане выпадают цифры от <strong>1</strong> до <strong>7</strong>. Приз даётся за три одинаковые цифры:</li>
       </ul>
 
       <table>
@@ -364,7 +757,7 @@
       </table>
 
       <div class="modal-actions">
-        <button type="button" class="btn-refill" id="refillBtn">♻ Пополнить (<span id="refillAmountText">100</span>)</button>
+        <button type="button" class="btn-refill" id="refillBtn">Пополнить (<span id="refillAmountText">100</span>)</button>
         <button type="button" class="btn-close-bottom" id="closeRulesBottom">Закрыть (Esc)</button>
       </div>
     </div>
@@ -372,9 +765,9 @@
 
   <script>
     // ================= НАСТРОЙКИ ИГРЫ (МЕНЯТЬ ЗДЕСЬ) =================
-    const START_CREDITS      = 100;   // Стартовый баланс
-    const SPIN_COST          = 10;    // Стоимость одного вращения
-    const WIN_CHANCE_PERCENT = 100;    // Шанс выпадения любой призовой тройки (0..100%)
+    const START_CREDITS      = 100;      // Стартовый баланс
+    const SPIN_COST          = 10;       // Стоимость одного вращения
+    const WIN_CHANCE_PERCENT = 35;      // Шанс выпадения любой призовой тройки (0..100%)
 
     // Награды за комбинации
     const REWARD_111         = 10;
@@ -385,6 +778,23 @@
     const REWARD_666         = 5000;
     const REWARD_777         = 1000000;
     // =================================================================
+
+    // Угловатые инопланетные SVG-пути для цифр 0-7
+    const ALIEN_GLYPHS = {
+      '0': '<polygon points="26,12 74,12 88,28 88,112 74,128 26,128 12,112 12,28" /><line class="core-line" x1="30" y1="98" x2="70" y2="42" />',
+      '1': '<polyline points="26,34 52,12 52,128" /><line x1="24" y1="128" x2="80" y2="128" /><line class="core-line" x1="52" y1="12" x2="52" y2="128" />',
+      '2': '<polyline points="16,32 32,12 72,12 86,28 86,56 16,106 16,128 86,128" /><line class="core-line" x1="16" y1="128" x2="86" y2="128" />',
+      '3': '<polyline points="18,12 84,12 54,58 86,74 86,112 70,128 18,128" /><line class="core-line" x1="54" y1="58" x2="84" y2="12" />',
+      '4': '<polyline points="72,128 72,12 14,84 88,84" /><line class="core-line" x1="72" y1="12" x2="72" y2="128" />',
+      '5': '<polyline points="84,12 20,12 16,64 72,64 86,80 86,112 70,128 18,128" /><line class="core-line" x1="20" y1="12" x2="16" y2="64" />',
+      '6': '<polyline points="78,12 30,12 14,32 14,112 30,128 72,128 86,112 86,76 70,62 14,62" /><line class="core-line" x1="14" y1="62" x2="70" y2="62" />',
+      '7': '<polyline points="16,12 86,12 40,128" /><line x1="28" y1="68" x2="74" y2="68" /><line class="core-line" x1="86" y1="12" x2="40" y2="128" />'
+    };
+
+    function renderAlienDigit(digitChar) {
+      const paths = ALIEN_GLYPHS[digitChar] || ALIEN_GLYPHS['0'];
+      return '<svg class="alien-glyph" viewBox="0 0 100 140">' + paths + '</svg>';
+    }
 
     let credits = START_CREDITS;
     let isSpinning = false;
@@ -458,7 +868,7 @@
 
     function setDigits(digitsStr, stateClass) {
       for (let i = 0; i < 3; i++) {
-        reelsEl[i].textContent = digitsStr[i];
+        reelsEl[i].innerHTML = renderAlienDigit(digitsStr[i]);
         reelsEl[i].className = 'reel' + (stateClass ? ' ' + stateClass : '');
       }
     }
@@ -551,18 +961,18 @@
 
       if (reward === REWARD_777) {
         setDigits(finalDigits, 'jackpot');
-        setMessage('🔥 ДЖЕКПОТ 777! +' + reward + ' КРЕДИТОВ! 🔥', 'jackpot');
+        setMessage('ДЖЕКПОТ 777! +' + reward + ' КРЕДИТОВ!', 'jackpot');
         playTone(400, 150);
         await sleep(210);
         playTone(800, 150);
         await sleep(210);
-        playTone(1600, 250);
+        playTone(1600, 500);
       } else if (reward > 0) {
         setDigits(finalDigits, 'win');
-        setMessage('🎉 ВЫИГРЫШ ' + finalDigits + '! +' + reward + ' КРЕДИТОВ!', 'win');
+        setMessage('ВЫИГРЫШ ' + finalDigits + '! +' + reward + ' КРЕДИТОВ!', 'win');
         playTone(500, 120);
         await sleep(170);
-        playTone(900, 160);
+        playTone(900, 120);
       } else {
         setDigits(finalDigits, '');
         setMessage('МИМО. ПОПРОБУЙ ЕЩЁ РАЗ!', '');
@@ -616,7 +1026,7 @@
 
     soundBtnEl.addEventListener('click', function() {
       soundEnabled = !soundEnabled;
-      soundBtnEl.textContent = soundEnabled ? '🔊 ЗВУК: ВКЛ' : '🔇 ЗВУК: ВЫКЛ';
+      soundBtnEl.textContent = soundEnabled ? 'ЗВУК: ВКЛ' : 'ЗВУК: ВЫКЛ';
     });
 
     document.getElementById('openRulesBtn').addEventListener('click', function() {
