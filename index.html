@@ -1,412 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IJINDRZHIH CASINO — Alien Sector</title>
-  <style>
-    :root {
-      --bg: #070b14;
-      --panel: #0e1628;
-      --border: #1e325c;
-      --accent: #00f0ff;
-      --green: #00ff88;
-      --gold: #ffd700;
-      --danger: #ff3b6b;
-      --text: #e2e8f0;
-      --muted: #7b8ba8;
-    }
-
-    * {
-      box-sizing: border-box;
-      user-select: none;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: radial-gradient(circle at center, #101b33 0%, var(--bg) 100%);
-      color: var(--text);
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .machine {
-      width: 100%;
-      max-width: 440px;
-      background: var(--panel);
-      border: 2px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.12), inset 0 0 20px rgba(0, 0, 0, 0.6);
-      text-align: center;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 1.4rem;
-      letter-spacing: 2px;
-      color: var(--accent);
-      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-    }
-
-    .subtitle {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 4px;
-      letter-spacing: 1px;
-    }
-
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 18px 0 14px;
-      padding: 10px 14px;
-      background: #080d1a;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .credits {
-      color: var(--green);
-      font-size: 1.05rem;
-    }
-
-    .sound-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.85rem;
-    }
-
-    .sound-btn:hover {
-      border-color: var(--accent);
-    }
-
-    .reels {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 16px 0;
-      padding: 16px;
-      background: #050811;
-      border: 2px solid #18284a;
-      border-radius: 12px;
-      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
-    }
-
-    .reel {
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3.6rem;
-      font-weight: bold;
-      color: var(--accent);
-      background: #0b1222;
-      border: 1px solid #1a2c50;
-      border-radius: 8px;
-      text-shadow: 0 0 12px rgba(0, 240, 255, 0.45);
-      transition: transform 0.1s, color 0.2s;
-    }
-
-    .reel.win {
-      color: var(--green);
-      border-color: var(--green);
-      text-shadow: 0 0 16px rgba(0, 255, 136, 0.8);
-      transform: scale(1.04);
-    }
-
-    .reel.jackpot {
-      color: var(--gold);
-      border-color: var(--gold);
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.95);
-      transform: scale(1.07);
-    }
-
-    .message {
-      min-height: 24px;
-      margin: 12px 0;
-      font-size: 0.95rem;
-      font-weight: bold;
-      color: var(--text);
-      letter-spacing: 0.5px;
-    }
-
-    .message.win { color: var(--green); }
-    .message.jackpot { color: var(--gold); }
-    .message.error { color: var(--danger); }
-
-    .controls {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    button.action-btn {
-      padding: 14px 12px;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      border: none;
-      transition: opacity 0.15s, transform 0.08s;
-    }
-
-    button.action-btn:active {
-      transform: scale(0.97);
-    }
-
-    button.action-btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .btn-spin {
-      background: var(--accent);
-      color: #04101a;
-      box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
-    }
-
-    .btn-auto {
-      background: #172645;
-      color: var(--text);
-      border: 1px solid var(--border) !important;
-    }
-
-    .btn-auto.active {
-      background: var(--green);
-      color: #041a0e;
-    }
-
-    .footer-links {
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .link-btn {
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-family: inherit;
-      font-size: 0.8rem;
-      cursor: pointer;
-      text-decoration: underline;
-      padding: 0;
-    }
-
-    /* Модальное окно правил */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(3, 6, 14, 0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      z-index: 100;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal {
-      background: var(--panel);
-      border: 2px solid var(--accent);
-      border-radius: 12px;
-      max-width: 420px;
-      width: 100%;
-      padding: 20px;
-      position: relative;
-      text-align: left;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
-    }
-
-    .modal h3 {
-      margin: 0 0 12px;
-      color: var(--accent);
-      font-size: 1.05rem;
-      padding-right: 24px;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .modal ul {
-      margin: 0 0 14px;
-      padding-left: 18px;
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      margin-bottom: 16px;
-    }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 6px 8px;
-      text-align: center;
-    }
-
-    th {
-      background: #080d1a;
-      color: var(--accent);
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .modal-actions button {
-      flex: 1;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      font-family: inherit;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-refill {
-      background: var(--green);
-      color: #041a0e;
-    }
-
-    .btn-close-bottom {
-      background: #1a2947;
-      color: var(--text);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="machine">
-    <div class="header">
-      <h1>👽 IJINDRZHIH CASINO 👽</h1>
-      <div class="subtitle">🛸 ALIEN SECTOR 7G • 777 ORACLE 👾</div>
-    </div>
-
-    <div class="status-bar">
-      <div class="credits">CREDITS: <span id="creditsVal">100</span></div>
-      <button class="sound-btn" id="soundBtn">🔊 ЗВУК: ВКЛ</button>
-    </div>
-
-    <div class="reels">
-      <div class="reel" id="reel0">0</div>
-      <div class="reel" id="reel1">0</div>
-      <div class="reel" id="reel2">0</div>
-    </div>
-
-    <div class="message" id="statusMsg">НАЖМИ SPACE ИЛИ SPIN</div>
-
-    <div class="controls">
-      <button class="action-btn btn-spin" id="spinBtn">SPIN (-10)</button>
-      <button class="action-btn btn-auto" id="autoBtn">AUTO: ВЫКЛ</button>
-    </div>
-
-    <div class="footer-links">
-      <span>СТАРТ (Space) • АВТО • СБРОС (Esc)</span>
-      <button class="link-btn" id="openRulesBtn">[ Правила игры ]</button>
-    </div>
-  </div>
-
-  <!-- Модальное окно правил -->
-  <div class="modal-backdrop" id="rulesModal">
-    <div class="modal">
-      <button class="modal-close" id="closeRulesTop">✕</button>
-      <h3>🛸 ПРАВИЛА «IJINDRZHIH CASINO»</h3>
-      <ul>
-        <li>👽 Стартовый баланс: <strong id="ruleStartCredits">100</strong> кредитов.</li>
-        <li>👾 Стоимость вращения (SPIN): <strong id="ruleSpinCost">10</strong> кредитов.</li>
-        <li>🛸 Шанс выпадения призовой тройки: <strong id="ruleWinChance">35%</strong>.</li>
-        <li>⚡ На каждом барабане выпадают цифры от <strong>1</strong> до <strong>7</strong>. Приз даётся за три одинаковые цифры:</li>
-      </ul>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Комбинация</th>
-            <th>Награда</th>
-            <th>Вес в призах</th>
-          </tr>
-        </thead>
-        <tbody id="payoutTableBody"></tbody>
-      </table>
-
-      <div class="modal-actions">
-        <button class="btn-refill" id="refillBtn">♻ Пополнить (<span id="refillAmountText">100</span>)</button>
-        <button class="btn-close-bottom" id="closeRulesBottom">Закрыть (Esc)</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ================= НАСТРОЙКИ ИГРЫ (МЕНЯТЬ ЗДЕСЬ) =================
-    const START_CREDITS      = 100;   // Стартовый баланс
-    const SPIN_COST          = 10;    // Стоимость одного вращения
-    const WIN_CHANCE_PERCENT = 35;    // Шанс выпадения любой призовой тройки (0..100%)
-
-    // Награды за комбинации
-    const REWARD_111         = 10;
-    const REWARD_222         = 20;
-    const REWARD_333         = 100;
-    const REWARD_444         = 200;
-    const REWARD_555         = 350;
-    const REWARD_666         = 500;
-    const REWARD_777         = 10000;
-    // =================================================================
-
-    let credits = START_CREDITS;
-    let isSpinning = false;
-    let autoMode = false;
-    let autoTimer = null;
-    let soundEnabled = true;
-    let audioCtx = null;
-
-    // Элементы интерфейса
-    const creditsValEl = document.getElementById('creditsVal');
-    const soundBtnEl   = document.getElementById('soundBtn');
-    const reelsEl      = [
-      document.getElementById('reel0'),
-      document.getElementById('reel1'),
-      document.getElementById('reel2')
-    ];
-    const statusMsgEl  = document.getElementById('statusMsg');
-    const spinBtnEl    = document.getElementById('spinBtn');
-    const autoBtnEl    = document.getElementById('autoBtn');
 const rulesModalEl = document.getElementById('rulesModal');
-// Синтезатор звука (имитация пищалки Arduino BUZZER_PIN)
 function playTone(freq, durationMs) {
 if (!soundEnabled) return;
 try {
@@ -426,13 +18,14 @@ osc.connect(gain);
 gain.connect(audioCtx.destination);
 osc.start();
 osc.stop(audioCtx.currentTime + durationMs / 1000);
-} catch (e) {
-// Игнорируем ошибку, если браузер заблокировал звук до клика
+} catch (e) {}
 }
+function sleep(ms) {
+return new Promise(function(resolve) {
+setTimeout(resolve, ms);
+});
 }
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 function randomInt(min, max) {
-// Возвращает целое число в диапазоне [min, max) — как random(min, max) в Arduino
 return Math.floor(Math.random() * (max - min)) + min;
 }
 function getWinReward(combo) {
@@ -449,24 +42,23 @@ default:    return 0;
 }
 function updateUI() {
 creditsValEl.textContent = credits;
-spinBtnEl.textContent = SPIN (-${SPIN_COST});
+spinBtnEl.textContent = 'SPIN (-' + SPIN_COST + ')';
 spinBtnEl.disabled = isSpinning || credits < SPIN_COST;
 }
-function setDigits(digitsStr, stateClass = '') {
+function setDigits(digitsStr, stateClass) {
 for (let i = 0; i < 3; i++) {
 reelsEl[i].textContent = digitsStr[i];
 reelsEl[i].className = 'reel' + (stateClass ? ' ' + stateClass : '');
 }
 }
-function setMessage(text, type = '') {
+function setMessage(text, type) {
 statusMsgEl.textContent = text;
 statusMsgEl.className = 'message' + (type ? ' ' + type : '');
 }
-// Инициализация таблицы правил из констант
 function initRulesTable() {
 document.getElementById('ruleStartCredits').textContent = START_CREDITS;
 document.getElementById('ruleSpinCost').textContent = SPIN_COST;
-document.getElementById('ruleWinChance').textContent = ${WIN_CHANCE_PERCENT}%;
+document.getElementById('ruleWinChance').textContent = WIN_CHANCE_PERCENT + '%';
 document.getElementById('refillAmountText').textContent = START_CREDITS;
 const rows = [
 { combo: '111', reward: REWARD_111, weight: '28%' },
@@ -475,23 +67,23 @@ const rows = [
 { combo: '444', reward: REWARD_444, weight: '13%' },
 { combo: '555', reward: REWARD_555, weight: '9%' },
 { combo: '666', reward: REWARD_666, weight: '5%' },
-{ combo: '777', reward: REWARD_777, weight: '3% (ДЖЕКПОТ)' },
+{ combo: '777', reward: REWARD_777, weight: '3% (ДЖЕКПОТ)' }
 ];
 const tbody = document.getElementById('payoutTableBody');
-tbody.innerHTML = rows.map(r => `
-${r.combo}
-+${r.reward}${r.weight}`).join('');
+let html = '';
+for (let i = 0; i < rows.length; i++) {
+html += '' + rows[i].combo + '+' + rows[i].reward + '' + rows[i].weight + '';
 }
-// Генерация стартовых цифр (как finishSpin(true) в Arduino)
+tbody.innerHTML = html;
+}
 function initFirstRun() {
 let initial = '';
 for (let i = 0; i < 3; i++) {
 initial += String(randomInt(1, 8));
 }
-setDigits(initial);
+setDigits(initial, '');
 updateUI();
 }
-// Основной цикл вращения
 async function spin() {
 if (isSpinning) return;
 if (credits < SPIN_COST) {
@@ -502,20 +94,18 @@ return;
 isSpinning = true;
 credits -= SPIN_COST;
 updateUI();
-setMessage('ВРАЩЕНИЕ БАРАБАНОВ...');
-setDigits('000');
-// Анимация 1400 мс (как animateGenDigits() в Arduino)
+setMessage('ВРАЩЕНИЕ БАРАБАНОВ...', '');
+setDigits('000', '');
 const startTime = performance.now();
 while (performance.now() - startTime < 1400) {
 let tempDigits = '';
 for (let i = 0; i < 3; i++) {
 tempDigits += String(randomInt(1, 8));
 }
-setDigits(tempDigits);
+setDigits(tempDigits, '');
 playTone(220, 15);
 await sleep(50);
 }
-// Расчёт результата (как finishSpin(false) в Arduino)
 let finalDigits = '';
 if (randomInt(0, 100) < WIN_CHANCE_PERCENT) {
 const roll = randomInt(0, 100);
@@ -527,7 +117,7 @@ else if (roll < 83) winChar = '4';
 else if (roll < 92) winChar = '5';
 else if (roll < 97) winChar = '6';
 else                winChar = '7';
-finalDigits = winChar.repeat(3);
+finalDigits = winChar + winChar + winChar;
 } else {
 for (let i = 0; i < 3; i++) {
 finalDigits += String(randomInt(1, 8));
@@ -537,7 +127,7 @@ const reward = getWinReward(finalDigits);
 credits += reward;
 if (reward === REWARD_777) {
 setDigits(finalDigits, 'jackpot');
-setMessage(🔥 ДЖЕКПОТ 777! +${reward} КРЕДИТОВ! 🔥, 'jackpot');
+setMessage('🔥 ДЖЕКПОТ 777! +' + reward + ' КРЕДИТОВ! 🔥', 'jackpot');
 playTone(400, 150);
 await sleep(210);
 playTone(800, 150);
@@ -545,13 +135,13 @@ await sleep(210);
 playTone(1600, 250);
 } else if (reward > 0) {
 setDigits(finalDigits, 'win');
-setMessage(🎉 ВЫИГРЫШ ${finalDigits}! +${reward} КРЕДИТОВ!, 'win');
+setMessage('🎉 ВЫИГРЫШ ' + finalDigits + '! +' + reward + ' КРЕДИТОВ!', 'win');
 playTone(500, 120);
 await sleep(170);
 playTone(900, 160);
 } else {
-setDigits(finalDigits);
-setMessage('МИМО. ПОПРОБУЙ ЕЩЁ РАЗ!');
+setDigits(finalDigits, '');
+setMessage('МИМО. ПОПРОБУЙ ЕЩЁ РАЗ!', '');
 }
 isSpinning = false;
 updateUI();
@@ -587,32 +177,32 @@ autoBtnEl.classList.remove('active');
 function resetBalance() {
 stopAuto();
 credits = START_CREDITS;
-setDigits('000');
-setMessage(БАЛАНС ПОПОЛНЕН ДО ${START_CREDITS}, 'win');
+setDigits('000', '');
+setMessage('БАЛАНС ПОПОЛНЕН ДО ' + START_CREDITS, 'win');
 updateUI();
 }
-// Обработчики кнопок
 spinBtnEl.addEventListener('click', spin);
 autoBtnEl.addEventListener('click', toggleAuto);
-soundBtnEl.addEventListener('click', () => {
+soundBtnEl.addEventListener('click', function() {
 soundEnabled = !soundEnabled;
 soundBtnEl.textContent = soundEnabled ? '🔊 ЗВУК: ВКЛ' : '🔇 ЗВУК: ВЫКЛ';
 });
-document.getElementById('openRulesBtn').addEventListener('click', () => {
+document.getElementById('openRulesBtn').addEventListener('click', function() {
 rulesModalEl.classList.add('open');
 });
-const closeRules = () => rulesModalEl.classList.remove('open');
+function closeRules() {
+rulesModalEl.classList.remove('open');
+}
 document.getElementById('closeRulesTop').addEventListener('click', closeRules);
 document.getElementById('closeRulesBottom').addEventListener('click', closeRules);
-rulesModalEl.addEventListener('click', (e) => {
+rulesModalEl.addEventListener('click', function(e) {
 if (e.target === rulesModalEl) closeRules();
 });
-document.getElementById('refillBtn').addEventListener('click', () => {
+document.getElementById('refillBtn').addEventListener('click', function() {
 resetBalance();
 closeRules();
 });
-// Управление с клавиатуры (Space и Esc)
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', function(e) {
 if (e.code === 'Space') {
 e.preventDefault();
 if (!rulesModalEl.classList.contains('open')) {
@@ -626,6 +216,5 @@ resetBalance();
 }
 }
 });
-// Старт
 initRulesTable();
 initFirstRun();
